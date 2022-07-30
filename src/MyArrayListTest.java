@@ -86,10 +86,16 @@ class MyArrayListTest {
 
     @org.junit.jupiter.api.Test
     void testEquals() {
+
     }
 
     @org.junit.jupiter.api.Test
     void size() {
+     String resultAdd = myArrayListTest.add("book");
+     int result = myArrayListTest.size();
+     MyArrayList myArrayList = new MyArrayList();
+     myArrayList.add("book");
+     assertEquals(result,myArrayList.size());
     }
 
     @org.junit.jupiter.api.Test
