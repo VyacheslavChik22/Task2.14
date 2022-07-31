@@ -6,107 +6,142 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class MyArrayListTest {
 
-   private MyArrayList myArrayListTest;
-   @BeforeEach
-   public void setUp(){
-    myArrayListTest = new MyArrayList();
-   }
+    private MyArrayList myArrayListTest;
+    private final String TEST_BOOK = "book"; // образец для сравнения
+    private final String[] Last_Test = {TEST_BOOK};
+    @BeforeEach
+    public void setUp() {
+        myArrayListTest = new MyArrayList();
+    }
 
 
     @org.junit.jupiter.api.Test
     void shouldAddItemWhenAdd() {
-    String result = myArrayListTest.add("book");
-    MyArrayList myArrayList = new MyArrayList();
-    assertEquals(result, myArrayList.add("book"));
-    assertEquals(myArrayListTest.size(),1);
+        String result = myArrayListTest.add(TEST_BOOK);
+        assertEquals(result, TEST_BOOK);
+        assertEquals(myArrayListTest.size(), 1);
     }
 
     @org.junit.jupiter.api.Test
     void shouldAddItemWithIndex() {
-     String result = myArrayListTest.add(0,"book");
-     MyArrayList myArrayList = new MyArrayList();
-     assertEquals(result, myArrayList.add(0,"book"));
-     assertEquals(myArrayListTest.size(),1);
+        String result = myArrayListTest.add(0, TEST_BOOK);
+        assertEquals(result, TEST_BOOK);
+        assertEquals(myArrayListTest.size(), 1);
 
     }
 
     @org.junit.jupiter.api.Test
-    void shouldAddItemOnPositionWhenAdd() {
-     String result = myArrayListTest.set(0,"book");
-     MyArrayList myArrayList = new MyArrayList();
-     assertEquals(result, myArrayList.set(0,"book"));
+    void shouldAddItemOnPositionWhenSet() {
+        String resultAdding = myArrayListTest.add(0, TEST_BOOK);
+        String result = myArrayListTest.set(0, TEST_BOOK);
+        assertEquals(result, TEST_BOOK);
+        assertEquals(myArrayListTest.size(), 1);
+
+
     }
 
     @org.junit.jupiter.api.Test
     void shouldFindItemByIndex() {
-     int result = myArrayListTest.indexOf("book");
-     MyArrayList myArrayList = new MyArrayList();
-     assertEquals(result, myArrayList.indexOf("book"));
+        String resultAdding = myArrayListTest.add(0, TEST_BOOK);
+        int result = myArrayListTest.indexOf(TEST_BOOK);
+        assertEquals(result, 0);
     }
 
     @org.junit.jupiter.api.Test
     void shouldExceptionIfItemIsNot() {
-     assertThrows(Exception.class, () -> myArrayListTest.remove("book"));
+        assertThrows(Exception.class, () -> myArrayListTest.remove(TEST_BOOK));
+
+    }
+
+
+    @org.junit.jupiter.api.Test
+    void shouldRemoveItemByIndex() {
+        String resultAdding = myArrayListTest.add(0, TEST_BOOK);
+        String result = myArrayListTest.remove(0);
+        assertEquals(result, TEST_BOOK);
+        assertEquals(myArrayListTest.size(), 0); // проверяем что массив пустой
+
 
     }
 
     @org.junit.jupiter.api.Test
-    void shouldRemoveItemByIndex() {
-     String added = myArrayListTest.add(0,"book");
-     String result = myArrayListTest.remove(0);
-     MyArrayList myArrayList = new MyArrayList();
-     assertEquals(result, myArrayList.add("book"));
-     assertThrows(Exception.class, () -> myArrayListTest.remove("book"));
-
+    void shouldReturnTrueOrTrue() {
+        String resultAdding = myArrayListTest.add(0, TEST_BOOK);
+        boolean result = myArrayListTest.contains(TEST_BOOK);
+        assertTrue(result);
     }
 
     @org.junit.jupiter.api.Test
     void shouldReturnTrueOrFalse() {
-     boolean result = myArrayListTest.contains(String.valueOf(true));
-     MyArrayList myArrayList = new MyArrayList();
-     assertEquals(result, myArrayList.contains(String.valueOf(true)));
+        boolean result = myArrayListTest.contains(TEST_BOOK);
+        assertFalse(result);
     }
+
 
     @org.junit.jupiter.api.Test
     void shouldReturnItemByLastIndex() {
-     String resultAdd = myArrayListTest.add("book");
-     int result = myArrayListTest.lastIndexOf("book");
-     MyArrayList myArrayList = new MyArrayList();
-     assertEquals(result,myArrayList.lastIndexOf("book"));
+     String resultAdd = myArrayListTest.add(TEST_BOOK);
+     int result = myArrayListTest.lastIndexOf(TEST_BOOK);
+     assertEquals(result,0);
     }
 
     @org.junit.jupiter.api.Test
     void shouldReturnItemByIndex() {
-     String resultAdd = myArrayListTest.add("book");
+     String resultAdd = myArrayListTest.add(TEST_BOOK);
      String result = myArrayListTest.get(0);
-     MyArrayList myArrayList = new MyArrayList();
-     myArrayList.add("book");
-     assertEquals(result,myArrayList.get(0));
+     assertEquals(result,TEST_BOOK);
     }
 
     @org.junit.jupiter.api.Test
-    void testEquals() {
-
+    void shouldTestEqualsBeValid() {
+        String resultAdd = myArrayListTest.add(TEST_BOOK);
+        MyArrayList expectedList = new MyArrayList();
+        expectedList.add(TEST_BOOK);
+        boolean result = myArrayListTest.equals(expectedList);
+        assertTrue(result);
+    }
+    @org.junit.jupiter.api.Test
+    void shouldTestEqualsBeNotValid() {
+        String resultAdd = myArrayListTest.add(TEST_BOOK);
+        MyArrayList expectedList = new MyArrayList();
+        boolean result = myArrayListTest.equals(expectedList);
+        assertFalse(result);
     }
 
+
+
     @org.junit.jupiter.api.Test
-    void size() {
-     String resultAdd = myArrayListTest.add("book");
+    void shouldReturnSize() {
+     String resultAdd = myArrayListTest.add(TEST_BOOK);
      int result = myArrayListTest.size();
-     MyArrayList myArrayList = new MyArrayList();
-     myArrayList.add("book");
-     assertEquals(result,myArrayList.size());
+     assertEquals(result,1);
+    }
+
+
+    @org.junit.jupiter.api.Test
+    void shouldReturnTrueIsEmpty() {
+        boolean result = myArrayListTest.isEmpty();
+        assertTrue(result);
     }
 
     @org.junit.jupiter.api.Test
-    void isEmpty() {
+    void shouldReturnFalseIsEmpty() {
+        String resultAdd = myArrayListTest.add(TEST_BOOK);
+        boolean result = myArrayListTest.isEmpty();
+        assertFalse(result);
     }
-
     @org.junit.jupiter.api.Test
     void clear() {
+        String resultAdd = myArrayListTest.add(TEST_BOOK);
+        myArrayListTest.clear();
+        int result = myArrayListTest.size();
+        assertEquals(result,0);
     }
 
     @org.junit.jupiter.api.Test
     void toArray() {
+        String resultAdd = myArrayListTest.add(TEST_BOOK);
+        String[] result = myArrayListTest.toArray();
+        assertArrayEquals(result,Last_Test);
     }
 }

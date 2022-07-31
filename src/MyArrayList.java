@@ -101,7 +101,7 @@ public class MyArrayList implements StringList {
     @Override
     public int lastIndexOf(String item) {
         validateItem(item);
-        for (int i = storageSize - 1; i > 0; i--) {
+        for (int i = storageSize - 1; i >= 0; i--) {
             if (storage[i].equals(item)) {
                 return i;
             }
